@@ -19,6 +19,8 @@ interface ITable {
   orderByField?: string | any;
   tabelCellComponent?: any;
   hideFieldsOnList?: string[];
+  toolbarActionComponent?: React.ReactElement;
+  tableName?: string;
 }
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -70,6 +72,8 @@ export default function EnhancedTable({
   orderByField,
   tabelCellComponent = null,
   hideFieldsOnList = [],
+  toolbarActionComponent,
+  tableName,
 }: ITable) {
   const [order, setOrder] = useState<Order>("desc");
   const [orderBy, setOrderBy] = useState<string>(orderByField);
@@ -95,6 +99,7 @@ export default function EnhancedTable({
     setSelected([]);
   };
 
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   const handleClick = (event: React.MouseEvent<unknown>, id: number) => {
     const selectedIndex = selected.indexOf(id);
     let newSelected: readonly number[] = [];
@@ -155,8 +160,21 @@ export default function EnhancedTable({
 
   return (
     <div className={styles.container}>
-      <Paper sx={{ width: "80%", mb: 2, border: "1px solid red" }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+      <Paper
+        sx={{
+          width: "100%",
+          mb: 2,
+          border: "1px solid red",
+          overflow: "auto",
+          padding: "20px",
+          minWidth: "700px",
+        }}
+      >
+        <EnhancedTableToolbar
+          numSelected={selected.length}
+          rightComponent={toolbarActionComponent}
+          tableName={tableName}
+        />
         <TableContainer>
           <Table aria-labelledby="tableTitle" size="medium">
             <EnhancedTableHead

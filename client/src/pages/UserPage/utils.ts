@@ -23,10 +23,4 @@ export const userTableCells = [
     disablePadding: true,
     label: "Phone Number",
   },
-  {
-    id: "RegistrationDate",
-    numeric: false,
-    disablePadding: true,
-    label: "RegistrationDate",
-  },
 ];

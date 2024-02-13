@@ -1,13 +1,16 @@
+import React from "react";
 import { alpha } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 
 interface EnhancedTableToolbarProps {
   numSelected: number;
+  tableName?: string;
+  rightComponent?: React.ReactElement;
 }
 
 function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
-  const { numSelected } = props;
+  const { numSelected, tableName, rightComponent } = props;
 
   return (
     <Toolbar
@@ -39,27 +42,10 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
           id="tableTitle"
           component="div"
         >
-          Table
+          {tableName}
         </Typography>
       )}
-      {/* {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton>
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
-      ) : (
-        <>
-          <Button
-            startIcon={<FileDownloadIcon />}
-            className={styles.downloadButton}
-            onClick={onDownloadCsv}
-          >
-            Download Csv
-          </Button>
-          {tableFilterComponent}
-        </>
-      )} */}
+      {rightComponent}
     </Toolbar>
   );
 }

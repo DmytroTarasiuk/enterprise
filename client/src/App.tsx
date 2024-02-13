@@ -1,9 +1,17 @@
 import React from "react";
 
+import EnterprisePage from "./pages/EnterprisePage";
 import UserPage from "./pages/UserPage";
 
+import "./App.css";
+
 function App() {
-  return <UserPage taxId={123456789} />;
+  return (
+    <div className="container">
+      <EnterprisePage />
+      <UserPage />
+    </div>
+  );
 }
 
 export default App;
