@@ -211,9 +211,44 @@ const addUsersToEnterprise = async (
   }
 };
 
+const getAllEnterprises = () => {
+  return new Promise((resolve, reject) => {
+    db.all(
+      `
+          SELECT Enterprise.*
+          FROM Enterprise
+        `,
+      (err, rows) => {
+        if (err) reject(err);
+        else resolve(rows);
+      }
+    );
+  });
+};
+
+// Add a new enterprise
+const addEnterprise = async (name, taxId, address) => {
+  try {
+    const stmt = db.prepare(
+      "INSERT INTO Enterprise (Name, TaxID, Address) VALUES (?, ?, ?)"
+    );
+
+    stmt.run(name, taxId, address);
+
+    stmt.finalize();
+
+    return { success: true };
+  } catch (error) {
+    console.error(error);
+    return { success: false, error: error.message };
+  }
+};
+
 module.exports = {
   getAllUsers,
   getUsersByTaxId,
   getUsersRegisteredAfterDate,
   addUsersToEnterprise,
+  getAllEnterprises,
+  addEnterprise,
 };

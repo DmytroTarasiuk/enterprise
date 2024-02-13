@@ -60,6 +60,32 @@ app.post("/enterprise/users/add", async (req, res) => {
   }
 });
 
+app.get("/enterprise/enterprises", async (req, res) => {
+  try {
+    const enterprises = await db.getAllEnterprises();
+    res.json(enterprises);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.post("/enterprise/add", async (req, res) => {
+  const { name, taxId, address } = req.body;
+
+  try {
+    const result = await db.addEnterprise(name, taxId, address);
+    res.json({
+      success: true,
+      message: "Enterprise added successfully",
+      result,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });

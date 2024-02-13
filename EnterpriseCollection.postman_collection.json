@@ -1,0 +1,179 @@
+{
+	"info": {
+		"_postman_id": "89196386-0c6e-4729-b6b9-176bd81e39e4",
+		"name": "EnterpriseCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6533326"
+	},
+	"item": [
+		{
+			"name": "Add user to enterprise",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"taxId\": \"123456789\",\r\n\"userHashes\":[\"user3243\", \"password\"],\r\n\"permissions\": [\"read\"],\r\n\"userData\": {\r\n    \"email\": \"testuser@email.com\",\r\n    \"firstName\": \"Test\",\r\n    \"lastName\": \"User\",\r\n    \"phoneNumber\": \"234234344\"\r\n}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5001/enterprise/users/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"enterprise",
+						"users",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get users by taxId",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/octet-stream",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5001/enterprise/users/123456789",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"enterprise",
+						"users",
+						"123456789"
+					],
+					"query": [
+						{
+							"key": "taxId",
+							"value": "123456789",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get users registered after date",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5001/enterprise/users/registered-after/2024-02-10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"enterprise",
+						"users",
+						"registered-after",
+						"2024-02-10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4Iiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjk5MDgxMzg1LCJleHAiOjE2OTkxNjc3ODUsImp0aSI6IjdlYjQ5NzAwLTY3NTUtNGQ2Yy1hZWI0LTcxNjNkYmMzNmY1NiJ9.kiMpOMZBvzyNDYXG2-igcLF3p96oP-_L4c_EX1-25Ts",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5001/enterprise/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"enterprise",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all enterprises",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5001/enterprise/enterprises",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"enterprise",
+						"enterprises"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add new enterprise",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Test enterprise\",\r\n    \"taxId\": \"111111111\",\r\n    \"address\": \"Test address\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5001/enterprise/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"enterprise",
+						"add"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
