@@ -20,6 +20,7 @@ interface ITable {
   hideFieldsOnList?: string[];
   toolbarActionComponent?: React.ReactElement;
   tableName?: string;
+  onAdd?: () => void;
 }
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -73,6 +74,7 @@ export default function EnhancedTable({
   hideFieldsOnList = [],
   toolbarActionComponent,
   tableName,
+  onAdd,
 }: ITable) {
   const [order, setOrder] = useState<Order>("desc");
   const [orderBy, setOrderBy] = useState<string>(orderByField);
@@ -153,6 +155,7 @@ export default function EnhancedTable({
           numSelected={selected.length}
           rightComponent={toolbarActionComponent}
           tableName={tableName}
+          onAddAction={onAdd}
         />
         <TableContainer>
           <Table aria-labelledby="tableTitle" size="medium">

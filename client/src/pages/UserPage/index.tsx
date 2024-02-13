@@ -1,10 +1,14 @@
 // Task 4. Frontend component
 import { useCallback, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
 import DynamicTable from "../../components/DynamicTable";
 import useEnterprise from "../../hooks/useEnterprise";
+import CustomModal from "../../modal";
+import { showModalWithParams } from "../../redux/modal/actions";
+import { CustomModalTypes } from "../../redux/modal/state";
 
 import UserTableCell, { IUserTableCell } from "./UserTableCell";
 import { userTableCells } from "./utils";
@@ -14,6 +18,7 @@ import styles from "./styles.module.css";
 const UserPage = () => {
   const [taxId, setTaxId] = useState<number>(123456789);
   const { getUsers, users } = useEnterprise(taxId);
+  const dispatch = useDispatch();
 
   const handleChange = (event: any) => {
     setTaxId(event.target.value);
@@ -22,6 +27,18 @@ const UserPage = () => {
   const handleClick = useCallback(() => {
     getUsers(taxId);
   }, [getUsers, taxId]);
+
+  const onAddUser = useCallback(() => {
+    dispatch(
+      showModalWithParams({
+        modalType: CustomModalTypes.ADD_USER,
+        params: {
+          refetch: getUsers,
+          taxId: taxId,
+        },
+      }),
+    );
+  }, [dispatch, getUsers, taxId]);
 
   useEffect(() => {
     getUsers();
@@ -32,6 +49,7 @@ const UserPage = () => {
       <DynamicTable
         rows={users}
         headCells={userTableCells}
+        onAdd={onAddUser}
         hideFieldsOnList={[
           "UserID",
           "Login",
@@ -53,7 +71,7 @@ const UserPage = () => {
               value={taxId}
               variant="outlined"
               placeholder="Please enter a tax id"
-              className={styles.input}
+              style={{ minWidth: "100px" }}
             />
             <Button onClick={handleClick} variant="contained" color="primary">
               Apply
@@ -61,6 +79,7 @@ const UserPage = () => {
           </div>
         }
       />
+      <CustomModal />
     </div>
   );
 };

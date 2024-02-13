@@ -1,16 +1,20 @@
 import React from "react";
+import Button from "@mui/material/Button";
 import { alpha } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+
+import styles from "./styles.module.css";
 
 interface EnhancedTableToolbarProps {
   numSelected: number;
   tableName?: string;
   rightComponent?: React.ReactElement;
+  onAddAction?: () => void;
 }
 
 function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
-  const { numSelected, tableName, rightComponent } = props;
+  const { numSelected, tableName, rightComponent, onAddAction } = props;
 
   return (
     <Toolbar
@@ -45,7 +49,14 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
           {tableName}
         </Typography>
       )}
-      {rightComponent}
+      <div className={styles.actions}>
+        {onAddAction && (
+          <Button variant="contained" color="primary" onClick={onAddAction}>
+            Add
+          </Button>
+        )}
+        {rightComponent}
+      </div>
     </Toolbar>
   );
 }

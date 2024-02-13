@@ -9,8 +9,8 @@ interface IUserData {
   phoneNumber: string;
 }
 
-interface IAddUSer {
-  taxId: string;
+export interface IAddUSer {
+  taxId: number;
   userHashes: string[];
   permissions: string[];
   userData: IUserData;
