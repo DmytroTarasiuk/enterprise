@@ -1,11 +1,13 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const db = require("./db");
 
 const app = express();
-const port = 3000;
+const port = 5001;
 
 app.use(bodyParser.json());
+app.use(cors());
 
 app.get("/enterprise/users", async (req, res) => {
   try {

@@ -1,7 +1,9 @@
 import React from "react";
 
+import UserPage from "./pages/UserPage";
+
 function App() {
-  return <div>Table</div>;
+  return <UserPage taxId={123456789} />;
 }
 
 export default App;
