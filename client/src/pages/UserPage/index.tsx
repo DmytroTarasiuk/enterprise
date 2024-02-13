@@ -33,7 +33,7 @@ const UserPage = () => {
       showModalWithParams({
         modalType: CustomModalTypes.ADD_USER,
         params: {
-          refetch: getUsers,
+          refetch: () => getUsers(taxId),
           taxId: taxId,
         },
       }),
