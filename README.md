@@ -9,7 +9,7 @@ This project consists of two main components: `enterpriseService` and `client`. 
 To set up the project, follow these steps:
 
 1. **Clone the repository**:
-   `git clone https://github.com/DmytroTarasiuk/dashboard.git`
+   `git clone https://github.com/DmytroTarasiuk/enterprise.git`
 
 2. **Navigate to the enterprise service**:
    `cd enterpriseService`
